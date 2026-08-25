@@ -1,4 +1,4 @@
-require('dotenv').config();
+﻿require('dotenv').config();
 const express   = require('express');
 const cors      = require('cors');
 const morgan    = require('morgan');
@@ -20,24 +20,21 @@ app.use('/api/bookings', require('./routes/bookings'));
 app.use('/api/admin',    require('./routes/admin'));
 app.use('/api/seo',      seoSettingsRouter);
 
-// robots.txt و sitemap.xml باید در ریشه سایت باشند تا موتورهای جست‌وجو پیدایشان کنند
+// robots.txt Ùˆ sitemap.xml Ø¨Ø§ÛŒØ¯ Ø¯Ø± Ø±ÛŒØ´Ù‡ Ø³Ø§ÛŒØª Ø¨Ø§Ø´Ù†Ø¯ ØªØ§ Ù…ÙˆØªÙˆØ±Ù‡Ø§ÛŒ Ø¬Ø³Øªâ€ŒÙˆØ¬Ùˆ Ù¾ÛŒØ¯Ø§ÛŒØ´Ø§Ù† Ú©Ù†Ù†Ø¯
 app.get('/robots.txt',  robotsTxt);
 app.get('/sitemap.xml', sitemapXml);
 
 app.get('/api/health', (req, res) => res.json({ status:'ok', node:process.version }));
-app.use((req, res) => res.status(404).json({ message:'مسیر یافت نشد' }));
+app.use((req, res) => res.status(404).json({ message:'Ù…Ø³ÛŒØ± ÛŒØ§ÙØª Ù†Ø´Ø¯' }));
 app.use((err, req, res, next) => { console.error(err); res.status(500).json({ message:err.message }); });
 
 const PORT = process.env.PORT || 5000;
 
-// اول دیتابیس رو init کن، بعد listen
 init().then(() => {
   app.listen(PORT, () => {
-    console.log('');
-    console.log('🚀 ════════════════════════════════');
-    console.log(`   بلیط یاب | پورت: ${PORT}`);
-    console.log(`   Node: ${process.version}`);
-    console.log(`   http://localhost:${PORT}/api/health`);
-    console.log('🚀 ════════════════════════════════');
+    console.log(`Padra Backend running on port ${PORT}`);
   });
-}).catch(err => { console.error('❌ خطا در راه‌اندازی دیتابیس:', err); process.exit(1); });
+}).catch((error) => {
+  console.error('Failed to initialize server:', error);
+  process.exit(1);
+});

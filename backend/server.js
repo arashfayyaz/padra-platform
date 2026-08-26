@@ -5,6 +5,7 @@ const morgan    = require('morgan');
 const rateLimit = require('express-rate-limit');
 const { init }  = require('./config/database');
 const { settingsRouter: seoSettingsRouter, robotsTxt, sitemapXml } = require('./routes/seo');
+const settingsRouter = require('./routes/settings');
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use('/api/trips',    require('./routes/trips'));
 app.use('/api/bookings', require('./routes/bookings'));
 app.use('/api/admin',    require('./routes/admin'));
 app.use('/api/seo',      seoSettingsRouter);
+app.use('/api/settings', settingsRouter);
 
 // robots.txt Ùˆ sitemap.xml Ø¨Ø§ÛŒØ¯ Ø¯Ø± Ø±ÛŒØ´Ù‡ Ø³Ø§ÛŒØª Ø¨Ø§Ø´Ù†Ø¯ ØªØ§ Ù…ÙˆØªÙˆØ±Ù‡Ø§ÛŒ Ø¬Ø³Øªâ€ŒÙˆØ¬Ùˆ Ù¾ÛŒØ¯Ø§ÛŒØ´Ø§Ù† Ú©Ù†Ù†Ø¯
 app.get('/robots.txt',  robotsTxt);
@@ -38,3 +40,5 @@ init().then(() => {
   console.error('Failed to initialize server:', error);
   process.exit(1);
 });
+
+

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -107,20 +107,71 @@ export default function Home() {
   return (
     <>
       {/* ─────────────────── HERO ─────────────────── */}
-      <section className="padra-hero">
-        <div className="padra-hero-deco padra-hero-deco-1"></div>
-        <div className="padra-hero-deco padra-hero-deco-2"></div>
+      <section className="padra-hero-modern">
+        <div className="padra-hero-noise"></div>
+        <div className="padra-hero-glow"></div>
+        <div className="padra-flight-line"></div>
 
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="padra-cloud padra-cloud-1"></div>
+        <div className="padra-cloud padra-cloud-2"></div>
+
+        <motion.div
+          className="padra-aircraft"
+          initial={{ opacity: 0, x: 80, y: 8 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <svg
+            className="padra-aircraft-svg"
+            viewBox="0 0 220 100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="padraPlaneBody" x1="35" y1="25" x2="190" y2="75" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stopColor="currentColor" stopOpacity="0.96" />
+                <stop offset="0.55" stopColor="currentColor" stopOpacity="0.72" />
+                <stop offset="1" stopColor="currentColor" stopOpacity="0.42" />
+              </linearGradient>
+              <filter id="padraPlaneShadow" x="-30%" y="-40%" width="160%" height="180%">
+                <feDropShadow dx="0" dy="5" stdDeviation="5" floodOpacity="0.18" />
+              </filter>
+            </defs>
+
+            <g filter="url(#padraPlaneShadow)">
+              <path
+                d="M18 49.5C18 46.8 20.2 44.7 22.9 44.7H91L128 18.5C132.2 15.5 137.7 15.1 142.3 17.8L148.5 21.5L128 44.7H177.5L197.5 35.8C201.3 34.1 205.7 35.1 208.4 38.2L211 41.2C213.7 44.4 213.7 48.9 211 52.1L208.4 55.1C205.7 58.2 201.3 59.2 197.5 57.5L177.5 48.7H128L148.5 71.9L142.3 75.6C137.7 78.3 132.2 77.9 128 74.9L91 48.7H22.9C20.2 48.7 18 51 18 49.5Z"
+                fill="url(#padraPlaneBody)"
+              />
+              <path
+                d="M92 45L128 18.5C132.2 15.5 137.7 15.1 142.3 17.8L148.5 21.5L128 44.7"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeOpacity="0.5"
+              />
+              <path
+                d="M92 49L128 74.9C132.2 77.9 137.7 78.3 142.3 75.6L148.5 71.9L128 48.7"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+              <circle cx="190" cy="46.7" r="2.2" fill="currentColor" opacity="0.55" />
+            </g>
+          </svg>
+        </motion.div>
+
+        <div className="container padra-hero-content">
           <motion.div
             className="text-center"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="padra-hero-eyebrow">
+            <div className="padra-hero-trust">
+              <span className="padra-hero-trust-dot"></span>
               <i className="bi bi-stars"></i>
-              پلتفرم شماره ۱ سفر در ایران
+              پلتفرم هوشمند سفر پادرا
             </div>
 
             <h1 className="padra-hero-title">
@@ -134,17 +185,16 @@ export default function Home() {
             </p>
           </motion.div>
 
-          {/* SEARCH BOX */}
           <motion.div
             className="row justify-content-center"
-            initial={{ opacity: 0, y: 48 }}
+            initial={{ opacity: 0, y: 34 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="col-xl-10">
-              <div className="padra-search-box">
+              <div className="padra-search-box-modern">
                 <form onSubmit={handleSearch}>
-                  <div className="row g-3 align-items-end">
+                  <div className="row g-2 align-items-end">
                     <div className="col-md-3">
                       <label className="padra-search-label">
                         <i className="bi bi-geo-alt-fill"></i> مبدا
@@ -211,9 +261,9 @@ export default function Home() {
                   </div>
                 </form>
 
-                {/* Quick links */}
-                <div className="d-flex align-items-center gap-2 mt-3 flex-wrap">
-                  <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>جستجوی سریع:</span>
+                <div className="padra-search-quick">
+                  <span>جستجوی سریع:</span>
+
                   {[
                     { label: 'تهران → مشهد', from: 'تهران', to: 'مشهد' },
                     { label: 'تهران → اصفهان', from: 'تهران', to: 'اصفهان' },
@@ -226,25 +276,6 @@ export default function Home() {
                         setForm({ ...form, from: q.from, to: q.to });
                         navigate(`/search?from=${q.from}&to=${q.to}`);
                       }}
-                      style={{
-                        background: 'var(--brand-light)',
-                        border: '1px solid var(--border-color)',
-                        borderRadius: '100px',
-                        padding: '4px 12px',
-                        fontSize: '0.78rem',
-                        color: 'var(--brand-primary)',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s',
-                        fontWeight: '500',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = 'var(--brand-primary)';
-                        e.currentTarget.style.color = '#fff';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = 'var(--brand-light)';
-                        e.currentTarget.style.color = 'var(--brand-primary)';
-                      }}
                     >
                       {q.label}
                     </button>
@@ -254,6 +285,8 @@ export default function Home() {
             </div>
           </motion.div>
         </div>
+
+        <div className="padra-hero-bottom-fade"></div>
       </section>
 
       {/* ─────────────────── FEATURES ─────────────────── */}
@@ -658,3 +691,4 @@ export default function Home() {
     </>
   );
 }
+

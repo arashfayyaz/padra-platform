@@ -8,3 +8,7 @@ backend/.env
 *.log
 
 *.bak
+frontend/dist/
+*.bak*
+*.backup*
+*.hero-backup
